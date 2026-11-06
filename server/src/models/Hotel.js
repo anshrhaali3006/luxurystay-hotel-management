@@ -1,0 +1,2 @@
+import mongoose from 'mongoose';
+const schema=new mongoose.Schema({name:{type:String,required:true,trim:true},code:{type:String,required:true,uppercase:true,trim:true},email:String,phone:String,address:String,city:String,country:String,timezone:{type:String,default:'Asia/Karachi'},currency:{type:String,default:'PKR'},checkInTime:{type:String,default:'14:00'},checkOutTime:{type:String,default:'11:00'},active:{type:Boolean,default:true}},{timestamps:true});schema.index({code:1},{unique:true});export default mongoose.model('Hotel',schema);

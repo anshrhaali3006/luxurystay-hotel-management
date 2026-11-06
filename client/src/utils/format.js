@@ -1,0 +1,3 @@
+export const money=(n,currency='PKR')=>new Intl.NumberFormat('en-PK',{style:'currency',currency,maximumFractionDigits:0}).format(Number(n)||0);export const date=(v)=>v?new Date(v).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}):'—';export const titleCase=(s='')=>s.replaceAll('_',' ').replace(/\b\w/g,c=>c.toUpperCase());
+
+export const greeting=(user)=>{const h=new Date().getHours();const part=h<5?'GOOD EVENING':h<12?'GOOD MORNING':h<18?'GOOD AFTERNOON':'GOOD EVENING';const first=String(user?.name||'').trim().split(' ')[0];return first?`${part}, ${first.toUpperCase()}`:part};

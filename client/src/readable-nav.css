@@ -1,0 +1,43 @@
+/* ==========================================================================
+   Larger, clearer navigation text. Loaded after every other stylesheet.
+   Covers: public / booking / guest-portal top bars, the staff sidebar and the staff top bar.
+   ========================================================================== */
+
+/* ---------- Public, booking and guest-portal top bars ---------- */
+.public-nav nav a,.booking-nav>div a,.portal-nav nav a,.portal-nav nav button{font-size:15px;font-weight:600;color:#26343c;letter-spacing:.1px}
+.public-nav nav a:hover,.booking-nav>div a:hover,.portal-nav nav a:hover,.portal-nav nav button:hover{color:#8a6420}
+.public-nav nav a.nav-login,.nav-login{font-size:15px!important;font-weight:700;padding:12px 20px!important}
+.public-brand b{font-size:25px}
+.public-brand small{font-size:10.5px;letter-spacing:1.5px;color:#5d6866;font-weight:600}
+.public-nav,.booking-nav,.portal-nav{height:88px}
+.portal-nav nav,.booking-nav>div,.public-nav nav{gap:clamp(16px,2.6vw,36px)}
+
+/* ---------- Staff sidebar ---------- */
+.sidebar .nav-link{font-size:16px;font-weight:500;color:#d4deea;padding:13px 15px}
+.sidebar .nav-link:hover{color:#fff}
+.sidebar .nav-link.active{font-weight:700;color:#fff}
+.sidebar .nav-link svg{width:20px;height:20px}
+.sidebar .nav-label{font-size:12px;color:#aebccd;letter-spacing:1.6px}
+.sidebar .brand b{font-size:19px}
+.sidebar .brand small{font-size:10px;color:#b6c3d2}
+.sidebar .hotel-switch b{font-size:14.5px}
+.sidebar .hotel-switch small{font-size:11px;color:#b6c3d2}
+.sidebar .profile-info b{font-size:15px}
+.sidebar .profile-info small{font-size:13px;color:#c0ccda}
+.sidebar .help-card b{font-size:14px}
+.sidebar .help-card p{font-size:13px;color:#c0ccda}
+
+/* ---------- Staff top bar ---------- */
+.main-column .crumb{font-size:15px;color:#4d5b69}
+.main-column .crumb b{font-size:18px;font-weight:700}
+.main-column .system-label{font-size:14px;color:#4d5b69;font-weight:600}
+.topbar{height:72px}
+.top-avatar,.avatar{font-size:15px}
+
+@media(max-width:900px){.main-column .crumb b{font-size:16px}}
+@media(max-width:700px){
+  .public-nav nav a{font-size:17px}
+  .portal-nav nav a,.portal-nav nav button{font-size:14px}
+  .public-brand small{font-size:9px}
+  .public-nav,.booking-nav,.portal-nav{height:72px}
+}

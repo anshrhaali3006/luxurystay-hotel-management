@@ -1,0 +1,16 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+process.env.JWT_SECRET='test-secret-test-secret';
+const express=(await import('express')).default;
+const {Reservation,Feedback,Notification}=await import('../src/models/Resource.js');
+const {default:router}=await import('../src/routes/api.js');
+const chain=v=>{const p=Promise.resolve(v);const q={populate:()=>q,then:p.then.bind(p),catch:p.catch.bind(p)};return q};
+let status='checked_out',already=false,created;
+Reservation.findOne=()=>chain({_id:'r1',hotelId:'h1',reference:'LS-ABC',status,guestId:{_id:'g1',firstName:'Ayesha',lastName:'Khan',email:'ayesha@example.com'}});
+Feedback.exists=async()=>already;Feedback.create=async d=>{created=d;return {_id:'f1',...d}};Notification.create=async()=>({});
+const app=express();app.use(express.json());app.use('/api',router);app.use((e,q,r,n)=>r.status(e.status||e.statusCode||500).json({success:false,error:{message:e.message}}));
+const server=app.listen(0);const url=`http://127.0.0.1:${server.address().port}/api/public/feedback`;test.after(()=>server.close());
+const send=b=>fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)});
+const good={reference:'ls-abc',email:'Ayesha@Example.com',rating:5,category:'service',comment:'Wonderful stay'};
+test('a guest can submit feedback with their reference and email',async()=>{const r=await send(good);assert.equal(r.status,201);assert.equal(created.rating,5);assert.equal(String(created.hotelId),'h1');});
+test('wrong email, bad rating, short comment are rejected',async()=>{assert.equal((await send({...good,email:'x@y.z'})).status,404);assert.equal((await send({...good,rating:9})).status,400);assert.equal((await send({...good,comment:'a'})).status,400);});
+test('pending bookings and duplicate feedback are refused',async()=>{status='pending';assert.equal((await send(good)).status,409);status='checked_out';already=true;assert.equal((await send(good)).status,409);already=false;});

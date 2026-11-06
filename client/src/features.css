@@ -1,0 +1,75 @@
+/* ---------- Password strength meter ---------- */
+.pw-meter{display:flex;align-items:center;gap:10px;margin-top:8px}
+.pw-bars{display:flex;gap:4px;flex:0 0 96px}
+.pw-bars i{flex:1;height:4px;border-radius:3px;background:#e3e8ee;transition:background .2s}
+.pw-meter small{font-size:11px;color:#7e8a92}
+.pw-1 .pw-bars i:nth-child(-n+1){background:#d9534f}
+.pw-2 .pw-bars i:nth-child(-n+2){background:#e0a030}
+.pw-3 .pw-bars i:nth-child(-n+3){background:#7cb26b}
+.pw-4 .pw-bars i:nth-child(-n+4){background:#3f9b5e}
+
+/* ---------- Auth extras ---------- */
+.auth3d-submit.linklike{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;margin-top:16px}
+.auth3d-submit.ghost{width:100%;background:transparent;color:#10253f;border:1px solid #c5a365;box-shadow:none;margin-top:14px}
+.auth3d-icon.success{color:#3f9b5e}
+.forgot-row{display:flex;justify-content:flex-end;margin:-4px 0 6px}
+.forgot-row a{font-size:12px;color:#a17c3d;text-decoration:none}
+.forgot-row a:hover,.forgot-row a:focus-visible{text-decoration:underline}
+.small-print{font-size:12px}
+
+/* ---------- Account page ---------- */
+.account-main{max-width:1060px;margin:0 auto;padding:36px clamp(18px,4vw,40px) 70px}
+.account-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:22px;margin-top:22px}
+.account-card{background:#fff;border:1px solid #e7e1d6;border-radius:14px;padding:24px;box-shadow:0 18px 40px -30px rgba(16,37,63,.35)}
+.account-card h2{display:flex;align-items:center;gap:9px;font-size:17px;margin:0 0 14px;color:#10253f}
+.account-card form{display:grid;gap:12px}
+.account-card label{display:grid;gap:6px;font-size:12px;color:#4b5961}
+.account-card input:not([type=checkbox]){height:42px;padding:0 12px;border:1px solid #dde3ea;border-radius:9px;font:inherit;background:#fff}
+.account-card input:disabled{background:#f3f4f6;color:#7e8a92}
+.account-card .check-row{display:flex;align-items:center;gap:8px;grid-auto-flow:column;justify-content:start}
+.account-card .gold-button{width:max-content}
+.account-card .muted{font-size:12px;line-height:1.5}
+button.top-avatar{border:0;cursor:pointer;font:inherit}
+
+/* ---------- Chatbot ---------- */
+.chatbot{position:fixed;right:22px;bottom:22px;z-index:900;font-family:'DM Sans',sans-serif}
+.chat-launch{width:56px;height:56px;border-radius:50%;border:0;cursor:pointer;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,#183451,#10253f);box-shadow:0 14px 30px -10px rgba(16,37,63,.7),0 0 0 3px rgba(197,163,101,.55);transition:transform .2s,box-shadow .2s}
+.chat-launch:hover{transform:translateY(-2px) scale(1.04)}
+.chat-launch:focus-visible,.chat-panel button:focus-visible,.chat-input input:focus-visible{outline:2px solid #c5a365;outline-offset:2px}
+.chat-panel{position:absolute;right:0;bottom:70px;width:min(380px,calc(100vw - 28px));height:min(560px,calc(100vh - 120px));display:flex;flex-direction:column;background:#fbf9f4;border:1px solid #e7e1d6;border-radius:18px;overflow:hidden;box-shadow:0 30px 70px -20px rgba(16,37,63,.55);animation:chat-in .22s ease-out}
+.chat-panel header{display:flex;align-items:center;gap:11px;padding:14px 14px 14px 16px;color:#fff;background:linear-gradient(135deg,#10253f,#1d3d5e)}
+.chat-panel header div{flex:1;line-height:1.25}
+.chat-panel header b{display:block;font-size:14px}
+.chat-panel header small{font-size:11px;opacity:.75}
+.chat-panel header button{background:transparent;border:0;color:#fff;cursor:pointer;padding:6px;border-radius:8px;display:grid}
+.chat-panel header button:hover{background:rgba(255,255,255,.12)}
+.chat-avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#c5a365;color:#10253f}
+.chat-log{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:10px}
+.chat-msg{max-width:86%;font-size:13.5px;line-height:1.5}
+.chat-msg p{margin:0;padding:10px 13px;border-radius:14px;white-space:pre-wrap;word-wrap:break-word}
+.chat-msg.bot{align-self:flex-start}
+.chat-msg.bot p{background:#fff;color:#1c2c3e;border:1px solid #ece6da;border-bottom-left-radius:4px}
+.chat-msg.user{align-self:flex-end}
+.chat-msg.user p{background:#10253f;color:#fff;border-bottom-right-radius:4px}
+.chat-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.chat-actions button{display:inline-flex;align-items:center;gap:5px;padding:7px 12px;border-radius:999px;border:0;cursor:pointer;font:inherit;font-size:12px;font-weight:600;background:#c5a365;color:#10253f}
+.chat-actions button:hover{background:#d3b57d}
+.chat-chips{display:flex;flex-wrap:wrap;gap:6px;padding:4px 14px 10px}
+.chat-chips button{padding:6px 11px;border-radius:999px;border:1px solid #d9cfba;background:#fff;color:#4b5961;font:inherit;font-size:12px;cursor:pointer}
+.chat-chips button:hover{border-color:#c5a365;color:#10253f}
+.chat-input{display:flex;gap:8px;padding:10px 12px;border-top:1px solid #ece6da;background:#fff}
+.chat-input input{flex:1;height:40px;padding:0 13px;border:1px solid #dde3ea;border-radius:999px;font:inherit;font-size:13.5px;background:#fbf9f4}
+.chat-input button{width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;display:grid;place-items:center;color:#fff;background:#10253f}
+.chat-input button:disabled{opacity:.4;cursor:not-allowed}
+.chat-note{padding:0 14px 10px;font-size:10.5px;color:#8a949a;background:#fff;text-align:center}
+.typing{display:flex;gap:4px;align-self:flex-start;padding:12px 14px;background:#fff;border:1px solid #ece6da;border-radius:14px;border-bottom-left-radius:4px}
+.typing i{width:6px;height:6px;border-radius:50%;background:#b9ad92;animation:chat-dot 1s infinite ease-in-out}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes chat-dot{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+@keyframes chat-in{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+@media (max-width:640px){
+  .chatbot{right:14px;bottom:14px}
+  .chat-panel{position:fixed;inset:auto 8px 80px 8px;width:auto;height:min(72vh,560px)}
+}
+@media (prefers-reduced-motion:reduce){.chat-panel,.typing i,.chat-launch{animation:none;transition:none}}
+.account-card a{color:#a17c3d}

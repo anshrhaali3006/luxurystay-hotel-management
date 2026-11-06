@@ -1,0 +1,55 @@
+/* ==========================================================================
+   Readability pass: larger sidebar navigation and table/data text.
+   Loaded LAST in main.jsx so it only adjusts sizes; no layout or logic changes.
+   ========================================================================== */
+
+/* ---------- Sidebar navigation ---------- */
+.sidebar .nav-label{font-size:11px;letter-spacing:1.4px}
+.sidebar .nav-link{font-size:15px;padding:12px 14px;gap:13px}
+.sidebar .nav-link.active{font-weight:700}
+.sidebar .nav-dot{width:7px;height:7px}
+.sidebar .hotel-switch b{font-size:13px}
+.sidebar .hotel-switch small{font-size:10px}
+.sidebar .profile-info b{font-size:14px}
+.sidebar .profile-info small{font-size:12px}
+.sidebar .help-card b{font-size:13px}
+.sidebar .help-card p{font-size:12px;line-height:1.6}
+
+/* ---------- Top bar breadcrumb ---------- */
+.main-column .crumb{font-size:13px}
+.main-column .crumb b{font-size:15px}
+.main-column .system-label{font-size:12px}
+
+/* ---------- Data tables ---------- */
+.main-column table{font-size:15px}
+.main-column th{font-size:12px;letter-spacing:.8px;padding:14px 17px}
+.main-column td{font-size:15px;padding:16px 17px}
+.main-column td b{font-size:15px}
+.main-column .ref-code{font-size:14px!important}
+.main-column .cell-sub{font-size:13px;margin-top:4px}
+.main-column .status{font-size:13px;padding:6px 10px}
+.main-column .you-badge{font-size:12px}
+.main-column .record-count{font-size:14px}
+.main-column .pagination{font-size:14px}
+.main-column .pagination button{font-size:14px;padding:8px 12px}
+.main-column .search-box input{font-size:14px}
+.main-column .toolbar .button{font-size:13px}
+.main-column .empty-state b{font-size:15px}
+.main-column .empty-state span{font-size:13px}
+
+/* ---------- Dashboard cards and panels ---------- */
+.main-column .stat-top{font-size:13px}
+.main-column .stat-card>small{font-size:12px}
+.main-column .panel-heading .eyebrow{font-size:10px}
+.main-column .panel-heading h3{font-size:18px}
+.main-column .panel-heading p{font-size:13px}
+.main-column .occupancy-legend>div{font-size:14px}
+.main-column .occupancy-legend b{font-size:15px}
+.main-column .ring-inner span{font-size:12px}
+.main-column .bottom-insight b{font-size:15px}
+.main-column .bottom-insight p{font-size:13px}
+.main-column .bottom-insight button{font-size:13px}
+.main-column .subtle-link{font-size:13px}
+.main-column .button{font-size:13px}
+.main-column .report-count{font-size:13px}
+.main-column .notice{font-size:14px}

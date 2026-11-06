@@ -1,0 +1,137 @@
+/* ==========================================================================
+   LuxuryStay — "Aurora Gilt" theme. Loaded LAST (after styles.css + luxe3d.css),
+   so it only restyles: no layout or logic is touched. Delete this file (and its
+   import in main.jsx) to go back to the previous look.
+   Idea: deep-navy sidebar with a living gold glow, an aurora-lit workspace,
+   glass panels with gradient hairline borders, glowing gold accents.
+   ========================================================================== */
+:root{
+  --aurora-1:rgba(197,163,101,.20);--aurora-2:rgba(64,110,170,.14);--aurora-3:rgba(120,90,200,.09);
+  --glass:rgba(255,255,255,.72);--glass-border:rgba(197,163,101,.28);
+  --gold-glow:0 0 0 1px rgba(197,163,101,.35),0 10px 30px -10px rgba(197,163,101,.55);
+}
+
+/* ---------- Workspace canvas: slow-moving aurora behind everything ---------- */
+body{background:#f3f1ec}
+.main-column{position:relative;isolation:isolate;
+  background:
+    radial-gradient(700px 480px at 92% -4%,var(--aurora-1),transparent 62%),
+    radial-gradient(640px 520px at -4% 38%,var(--aurora-2),transparent 62%),
+    radial-gradient(560px 460px at 70% 105%,var(--aurora-3),transparent 62%),
+    linear-gradient(180deg,#f7f5f0,#eef1f5)}
+.main-column::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(16,37,63,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(16,37,63,.035) 1px,transparent 1px);
+  background-size:44px 44px;-webkit-mask-image:radial-gradient(circle at 70% 10%,#000,transparent 70%);mask-image:radial-gradient(circle at 70% 10%,#000,transparent 70%)}
+.page-content{background:none}
+
+/* ---------- Sidebar: glowing gold spine, pill navigation ---------- */
+.sidebar{background:
+  radial-gradient(140% 40% at 0% 0%,rgba(197,163,101,.28),transparent 60%),
+  radial-gradient(100% 35% at 100% 100%,rgba(70,110,180,.25),transparent 60%),
+  linear-gradient(185deg,#0d2038 0%,#0f2542 50%,#07162a 100%)}
+.sidebar::after{content:'';position:absolute;top:0;bottom:0;right:0;width:1px;background:linear-gradient(180deg,transparent,rgba(226,199,142,.7),transparent)}
+.brand-mark{background:linear-gradient(145deg,#1d3a5e,#0c1f36);box-shadow:0 0 0 1px rgba(226,199,142,.5),0 0 24px -4px rgba(226,199,142,.55);animation:pulseGold 3.4s infinite}
+.hotel-switch{background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.03));border-color:rgba(226,199,142,.22);backdrop-filter:blur(6px)}
+.nav-link{border-radius:12px;padding:11px 14px}
+.nav-link:hover{background:rgba(255,255,255,.07)}
+.nav-link.active{background:linear-gradient(90deg,rgba(226,199,142,.32),rgba(226,199,142,.06));box-shadow:inset 0 0 0 1px rgba(226,199,142,.35),0 12px 24px -14px rgba(226,199,142,.6);color:#fff}
+.nav-link.active:before{left:-14px;width:4px;background:linear-gradient(180deg,#f3e2b3,#b98f4a);box-shadow:0 0 14px rgba(226,199,142,.9)}
+.nav-dot{box-shadow:0 0 0 0 rgba(226,199,142,.7);animation:pulseGold 2s infinite}
+.help-card{background:linear-gradient(145deg,rgba(226,199,142,.16),rgba(255,255,255,.03));border-color:rgba(226,199,142,.25)}
+.avatar,.top-avatar{background:linear-gradient(145deg,#f3e2b3,#b98f4a);color:#10253f;box-shadow:0 0 0 2px rgba(255,255,255,.25),0 8px 16px -6px rgba(185,143,74,.8)}
+
+/* ---------- Top bar ---------- */
+.topbar{background:rgba(255,255,255,.7);border-bottom:1px solid rgba(197,163,101,.25)}
+.crumb b{background:linear-gradient(90deg,#10253f,#8a6b34);-webkit-background-clip:text;background-clip:text;color:transparent}
+.live-dot{animation:pulseGold 2s infinite;box-shadow:0 0 10px #49a77a}
+
+/* ---------- Page header ---------- */
+.page-header h1{background:linear-gradient(100deg,#0f2540 20%,#8a6b34 70%,#c5a365);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:32px}
+.page-header .eyebrow{display:inline-flex;align-items:center;gap:10px}
+.page-header .eyebrow::before{content:'';width:26px;height:2px;background:linear-gradient(90deg,#c5a365,transparent);border-radius:2px}
+
+/* ---------- Welcome strip: aurora banner with a sweeping highlight ---------- */
+.welcome-strip{border-radius:16px;border:1px solid rgba(226,199,142,.3);
+  background-image:radial-gradient(520px 240px at 92% 0%,rgba(226,199,142,.38),transparent 62%),radial-gradient(420px 220px at 0% 120%,rgba(90,140,220,.28),transparent 62%),linear-gradient(120deg,#0c1f37,#17365a)}
+.welcome-strip::after{content:'';position:absolute;top:0;bottom:0;width:30%;left:0;background:linear-gradient(100deg,transparent,rgba(255,255,255,.10),transparent);transform:translateX(-130%) skewX(-18deg);animation:sheen 7s ease-in-out infinite 1.5s;pointer-events:none}
+.welcome-strip b{font-size:22px;background:linear-gradient(90deg,#fff,#f1dfae);-webkit-background-clip:text;background-clip:text;color:transparent}
+.welcome-kicker{display:inline-flex;align-items:center;gap:8px}
+.welcome-kicker::before{content:'';width:7px;height:7px;border-radius:50%;background:#e6cf9a;box-shadow:0 0 12px #e6cf9a}
+
+/* ---------- Stat cards: glass + gradient hairline + glowing icon ---------- */
+.stat-card{border:1px solid transparent;border-radius:16px;overflow:hidden;
+  background:linear-gradient(var(--glass),var(--glass)) padding-box,linear-gradient(145deg,rgba(197,163,101,.7),rgba(16,37,63,.08) 45%,rgba(197,163,101,.35)) border-box;
+  backdrop-filter:blur(10px);min-height:128px}
+.stat-card::after{content:'';position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,rgba(197,163,101,.22),transparent 70%);pointer-events:none}
+.stat-card.gold{background:linear-gradient(rgba(255,251,242,.85),rgba(255,251,242,.85)) padding-box,linear-gradient(145deg,#e6cf9a,rgba(16,37,63,.1) 50%,#c5a365) border-box}
+.stat-top{font-weight:600;letter-spacing:.2px}
+.stat-icon{border-radius:12px;width:36px;height:36px;background:linear-gradient(145deg,#1d3a5e,#0c1f36);color:#e6cf9a;box-shadow:0 10px 18px -8px rgba(12,31,54,.8)}
+.stat-icon.gold{box-shadow:0 0 22px -2px rgba(197,163,101,.9)}
+.stat-card>strong{font-size:28px;font-family:'Playfair Display',serif;background:linear-gradient(120deg,#0f2540,#2c4f78);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;font-variant-numeric:tabular-nums}
+.stat-card.gold>strong{background:linear-gradient(120deg,#7a5a24,#c5a365 70%,#8a6b34);-webkit-background-clip:text;background-clip:text}
+
+/* ---------- Panels: glass ---------- */
+.panel{border:1px solid transparent;border-radius:18px;
+  background:linear-gradient(var(--glass),var(--glass)) padding-box,linear-gradient(160deg,rgba(197,163,101,.45),rgba(16,37,63,.06) 40%,rgba(197,163,101,.2)) border-box;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.panel-heading h3{font-size:18px}
+.panel-heading .eyebrow{display:inline-block;padding:3px 8px;border-radius:20px;background:rgba(197,163,101,.16);color:#8a6b34;font-size:8px}
+.subtle-link{padding:6px 11px;border-radius:20px;background:rgba(197,163,101,.14);transition:background .2s,transform .2s}
+.subtle-link:hover{background:rgba(197,163,101,.28);transform:translateX(2px)}
+
+/* ---------- Revenue chart + type switcher ---------- */
+.rc-head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-top:14px}
+.rc-figures{display:grid;gap:3px}
+.rc-figures span{font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:#8a96a3;font-weight:700}
+.rc-figures b{font:600 26px 'Playfair Display',serif;background:linear-gradient(120deg,#7a5a24,#c5a365);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rc-figures small{font-size:10px;color:#8a96a3}
+.chart-switch{display:inline-flex;gap:4px;padding:4px;border-radius:30px;background:rgba(16,37,63,.06);border:1px solid rgba(16,37,63,.06)}
+.chart-switch button{display:inline-flex;align-items:center;gap:6px;border:0;background:transparent;padding:7px 13px;border-radius:30px;font-size:11px;font-weight:600;color:#56677a;transition:background .2s,color .2s,box-shadow .2s}
+.chart-switch button:hover{color:#10253f}
+.chart-switch button.active{background:linear-gradient(145deg,#1d3a5e,#0c1f36);color:#f1dfae;box-shadow:0 8px 14px -8px rgba(12,31,54,.8)}
+.revenue-chart .chart-wrap{margin-top:12px}
+.receptionist-revenue{padding:22px 22px 19px;margin-bottom:20px}
+
+/* ---------- Tables ---------- */
+thead{background:linear-gradient(180deg,rgba(247,242,230,.9),rgba(247,249,251,.9))}
+th{color:#8a6b34}
+tbody tr:hover{background:linear-gradient(90deg,rgba(197,163,101,.10),transparent)}
+.status{border-radius:20px;padding:5px 10px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.6)}
+
+/* ---------- Buttons & inputs ---------- */
+.button{border-radius:12px;min-height:40px}
+.button.primary{background:linear-gradient(145deg,#1d3a5e,#0c1f36);color:#f6e8c4;box-shadow:0 1px 0 rgba(255,255,255,.2) inset,0 14px 22px -12px rgba(12,31,54,.85),0 0 0 1px rgba(226,199,142,.25)}
+.button.primary:hover{background:linear-gradient(145deg,#27497a,#10294a);box-shadow:0 1px 0 rgba(255,255,255,.2) inset,0 18px 26px -12px rgba(12,31,54,.9),0 0 0 1px rgba(226,199,142,.5)}
+.button.secondary{background:rgba(255,255,255,.8);border-color:rgba(197,163,101,.4);color:#4a3a1c}
+.form-grid input:focus,.form-grid select:focus,.form-grid textarea:focus,.filter-field input:focus,.filter-field select:focus,.login-form-wrap input:focus,.search-box:focus-within{outline:none;border-color:#c5a365;box-shadow:0 0 0 4px rgba(197,163,101,.2)}
+.search-box,.form-grid input,.form-grid select,.form-grid textarea,.filter-field input,.filter-field select{border-radius:10px}
+.report-filters{border-radius:18px}
+
+/* ---------- Misc workspace ---------- */
+.salary-card{border-radius:16px;border:1px solid rgba(197,163,101,.35);background:linear-gradient(120deg,rgba(255,251,242,.9),rgba(247,241,226,.9));box-shadow:var(--gold-glow)}
+.feedback-card,.task-card{border-radius:16px;transition:transform .3s var(--ease-out),box-shadow .3s}
+.feedback-card:hover,.task-card:hover{transform:translateY(-4px);box-shadow:0 24px 36px -22px rgba(16,37,63,.45)}
+.bottom-insight{border-radius:16px;background:var(--glass);backdrop-filter:blur(10px);border-color:rgba(197,163,101,.3)}
+.insight-icon{background:linear-gradient(145deg,#f3e2b3,#c5a365);color:#10253f;box-shadow:0 0 18px -4px rgba(197,163,101,.8)}
+.empty-mark{background:linear-gradient(145deg,#f3e2b3,#c5a365);color:#10253f;border:0;box-shadow:0 0 24px -4px rgba(197,163,101,.7)}
+.modal{border-radius:20px;border:1px solid rgba(197,163,101,.35)}
+.occupancy-ring svg circle:nth-child(2){filter:drop-shadow(0 0 8px rgba(197,163,101,.8))}
+.footer{background:rgba(255,255,255,.6);backdrop-filter:blur(8px)}
+
+/* ---------- Login / register: living gradient art panel ---------- */
+.login-art{background:radial-gradient(600px 400px at 85% 10%,rgba(226,199,142,.35),transparent 62%),radial-gradient(500px 420px at 0% 100%,rgba(80,130,220,.30),transparent 62%),linear-gradient(150deg,#0a1b30,#14335a 60%,#0b1f38);background-size:140% 140%;animation:auroraShift 16s ease-in-out infinite alternate}
+.art-copy h1 em{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.login-form-wrap{border:1px solid rgba(197,163,101,.35);padding:32px 30px;border-radius:20px}
+.login-form-wrap .button{background:var(--gold-grad);color:#10253f;box-shadow:0 5px 0 var(--gold-deep),0 18px 26px -12px rgba(138,107,52,.75)}
+.login-form-wrap .button:hover{transform:translateY(-2px)}
+
+/* ---------- Public pages polish ---------- */
+.gold-button,.search-stays{border-radius:2px}
+.service-grid article,.showcase-card,.available-room{border-radius:12px}
+.hero-kicker{text-shadow:0 0 18px rgba(234,214,167,.6)}
+
+@keyframes auroraShift{from{background-position:0% 0%}to{background-position:100% 100%}}
+
+@media(max-width:600px){.page-header h1{font-size:26px}.stat-card>strong{font-size:23px}.rc-figures b{font-size:22px}}
+@media print{.main-column{background:#fff!important}.main-column::before{display:none}.panel,.stat-card{background:#fff!important;border:1px solid #ddd!important;backdrop-filter:none}.chart-switch{display:none}}
+@media(prefers-reduced-motion:reduce){.brand-mark,.nav-dot,.live-dot,.login-art,.welcome-strip::after{animation:none!important}}
