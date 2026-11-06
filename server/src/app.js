@@ -7,16 +7,16 @@ import rateLimit from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
 import cookieParser from "cookie-parser";
 import api from "./routes/api.js";
+import os from 'node:os';
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
 const app = express();
 const here = path.dirname(fileURLToPath(import.meta.url));
-app.use(
-  "/uploads",
-  express.static(path.resolve(here, "../uploads"), {
-    fallthrough: false,
-    maxAge: "1d",
-  }),
-);
+const uploadsDir = path.join(os.tmpdir(), 'luxurystay-uploads');
+
+app.use('/uploads', express.static(uploadsDir, {
+  fallthrough: false,
+  maxAge: '1d'
+}));
 app.disable("x-powered-by");
 app.use(helmet());
 app.use(

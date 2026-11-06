@@ -90,8 +90,8 @@ const guestBookingFilter = async (req) => {
   const ids = await Guest.find({ email: req.user.email }).distinct("_id");
   return { $or: [{ guestId: { $in: ids } }, { createdBy: req.user._id }] };
 };
-const here = path.dirname(fileURLToPath(import.meta.url));
-const uploadsDir = path.resolve(here, "../../uploads");
+const uploadsDir = path.join(os.tmpdir(), 'luxurystay-uploads');
+
 fs.mkdirSync(uploadsDir, { recursive: true });
 const imageUpload = multer({
   storage: multer.diskStorage({
