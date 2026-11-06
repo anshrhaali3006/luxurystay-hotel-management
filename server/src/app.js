@@ -10,6 +10,7 @@ import api from "./routes/api.js";
 import os from 'node:os';
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
 const app = express();
+app.set('trust proxy', 1);
 const here = path.dirname(fileURLToPath(import.meta.url));
 const uploadsDir = path.join(os.tmpdir(), 'luxurystay-uploads');
 
