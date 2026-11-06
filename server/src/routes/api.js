@@ -1,9 +1,6 @@
 import { Router } from "express";
 import multer from "multer";
-import fs from "node:fs";
-import os from 'node:os';
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import cloudinary from "../config/cloudinary.js";
 import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 import HotelModel from "../models/Hotel.js";
@@ -90,34 +87,50 @@ const guestBookingFilter = async (req) => {
   const ids = await Guest.find({ email: req.user.email }).distinct("_id");
   return { $or: [{ guestId: { $in: ids } }, { createdBy: req.user._id }] };
 };
-const uploadsDir = path.join(os.tmpdir(), 'luxurystay-uploads');
 
-fs.mkdirSync(uploadsDir, { recursive: true });
 const imageUpload = multer({
-  storage: multer.diskStorage({
-    destination: (_req, _file, cb) => cb(null, uploadsDir),
-    filename: (_req, file, cb) => {
-      const ext = {
-        "image/jpeg": ".jpg",
-        "image/png": ".png",
-        "image/webp": ".webp",
-        "image/gif": ".gif",
-      }[file.mimetype];
-      cb(
-        null,
-        `${Date.now()}-${Math.random().toString(36).slice(2, 9)}${ext || ".img"}`,
-      );
-    },
-  }),
-  limits: { fileSize: 5 * 1024 * 1024, files: 5 },
-  fileFilter: (_req, file, cb) =>
-    cb(
-      null,
-      ["image/jpeg", "image/png", "image/webp", "image/gif"].includes(
-        file.mimetype,
-      ),
-    ),
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+    files: 5,
+  },
+  fileFilter: (_req, file, cb) => {
+    const allowed = [
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+      "image/gif",
+    ];
+
+    if (!allowed.includes(file.mimetype)) {
+      return cb(new AppError("Only JPG, PNG, WEBP and GIF images are allowed", 400));
+    }
+
+    cb(null, true);
+  },
 });
+
+const uploadToCloudinary = (file) => {
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        folder: "luxurystay/rooms",
+        resource_type: "image",
+      },
+      (error, result) => {
+        if (error) return reject(error);
+
+        resolve({
+          url: result.secure_url,
+          publicId: result.public_id,
+        });
+      }
+    );
+
+    stream.end(file.buffer);
+  });
+};
+
 router.post("/auth/login", validateBody(loginSchema), login);
 router.post(
   "/auth/forgot-password",
@@ -500,22 +513,30 @@ router.post(
   }),
 );
 router.use(authenticate);
+
 router.post(
   "/uploads/images",
   imageUpload.array("images", 5),
   asyncHandler(async (req, res) => {
-    if (!req.files?.length)
+    if (!req.files?.length) {
       throw new AppError(
         "Choose up to 5 JPG, PNG, WEBP, or GIF images under 5 MB each",
-        400,
+        400
       );
-    res
-      .status(201)
-      .json({
-        success: true,
-        data: { urls: req.files.map((file) => `/uploads/${file.filename}`) },
-      });
-  }),
+    }
+
+    const uploadedImages = await Promise.all(
+      req.files.map((file) => uploadToCloudinary(file))
+    );
+
+    res.status(201).json({
+      success: true,
+      data: {
+        urls: uploadedImages.map((image) => image.url),
+        images: uploadedImages,
+      },
+    });
+  })
 );
 router.get("/auth/me", me);
 router.post("/auth/logout", logout);
